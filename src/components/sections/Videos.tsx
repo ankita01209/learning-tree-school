@@ -68,7 +68,7 @@ function VideoCard({ video, index }: { video: VideoItem; index: number }) {
 }
 
 export default function Videos() {
-  const videos = getDisplayVideos(4);
+  const videos = getDisplayVideos(5);
 
   return (
     <section className="py-24 bg-[#FFF9F2] relative">

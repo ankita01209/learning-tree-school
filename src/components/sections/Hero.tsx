@@ -3,11 +3,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import Image from 'next/image';
-import { getHeroGalleryImage } from '@/data/gallery';
+
 import { scrollToSection } from '@/lib/scrollToSection';
 
 export default function Hero() {
-  const heroImage = getHeroGalleryImage();
+  const heroImage = {
+    src: '/school-assets/hero/firstday1.jpeg',
+    alt: 'First day at Learning Tree',
+  };
 
   return (
     <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden bg-[#FFF9F2] pt-24 pb-12">

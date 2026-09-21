@@ -21,7 +21,7 @@ export default function About() {
               <div className="absolute inset-0 bg-[#F28C7A] rounded-[2rem] transform rotate-3 opacity-15" />
               <div className="relative w-full h-full rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white">
                 <Image
-                  src="/school-assets/WhatsApp Image 2026-09-15 at 15.19.26.jpeg"
+                  src="/school-assets/gallery/with_teachers.jpeg"
                   alt="Students at Learning Tree School"
                   fill
                   className="object-cover"
