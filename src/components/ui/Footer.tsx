@@ -24,15 +24,24 @@ export function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-5">
-              <div className="w-10 h-10 bg-[#397D67] rounded-full flex items-center justify-center text-white font-extrabold text-base border-2 border-[#F4C95D] shrink-0">
-                LT
-              </div>
-              <span className="font-extrabold text-xl text-white tracking-tight">Learning Tree</span>
+              <img
+                src="/school-assets/logo.jpeg"
+                alt="Learning Tree School logo"
+                className="w-10 h-10 object-contain rounded-full shrink-0"
+              />
+
+              <span className="font-extrabold text-xl text-white tracking-tight">
+                Learning Tree
+              </span>
             </div>
+
             <p className="text-white/70 text-sm leading-relaxed mb-5">
               Nurturing curiosity and inspiring growth in a warm, play-based environment since 2017.
             </p>
-            <p className="text-white/50 text-xs">Discover · Learn · Grow</p>
+
+            <p className="text-white/50 text-xs">
+              Discover · Learn · Grow
+            </p>
           </div>
 
           {/* Quick Links */}

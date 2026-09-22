@@ -14,7 +14,7 @@ export const videosItems: VideoItem[] = [
     title: 'School Activity 1',
     description: 'A glimpse of learning and activities at Learning Tree School.',
     thumbnail: null,
-    videoUrl: '/school-assets/videos/painting.mp4',
+    videoUrl: '/school-assets/videos/video-2.mp4',
     isUnverified: true,
   },
   {
@@ -30,7 +30,7 @@ export const videosItems: VideoItem[] = [
     title: 'School Activity 3',
     description: 'A glimpse of learning and activities at Learning Tree School.',
     thumbnail: null,
-    videoUrl: '/school-assets/videos/video-2.mp4',
+    videoUrl: '/school-assets/videos/video-4.mp4',
     isUnverified: true,
   },
   {
@@ -39,14 +39,6 @@ export const videosItems: VideoItem[] = [
     description: 'A glimpse of learning and activities at Learning Tree School.',
     thumbnail: null,
     videoUrl: '/school-assets/videos/video-3.mp4',
-    isUnverified: true,
-  },
-  {
-    id: 'video-05',
-    title: 'School Activity 5',
-    description: 'A glimpse of learning and activities at Learning Tree School.',
-    thumbnail: null,
-    videoUrl: '/school-assets/videos/video-4.mp4',
     isUnverified: true,
   },
 ];

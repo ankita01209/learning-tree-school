@@ -2,9 +2,41 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { galleryImages } from '@/data/gallery';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+const getGridPattern = (index: number) => {
+  const c = [
+    "col-span-1 row-span-1 sm:col-span-2 sm:row-span-2 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-2 md:row-span-1 lg:col-span-1 lg:row-span-2",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-1 md:row-span-2 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-2 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-2 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-2 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-2 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-2",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-2 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-1 md:row-span-1 lg:col-span-2 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-2 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-2",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-2",
+    "col-span-1 row-span-1 sm:col-span-2 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-2 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-2 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-2 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-2 lg:row-span-1",
+    "col-span-1 row-span-1 sm:col-span-2 sm:row-span-1 md:col-span-1 md:row-span-1 lg:col-span-2 lg:row-span-1",
+  ];
+  return c[index] || "col-span-1 row-span-1";
+};
 
 export default function Gallery() {
   const images = galleryImages;
@@ -50,28 +82,25 @@ export default function Gallery() {
           subtitle="Glimpses into the everyday magic that happens at Learning Tree."
         />
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 mt-16 [column-fill:_balance]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 mt-16 grid-flow-row-dense auto-rows-[280px] sm:auto-rows-[160px] md:auto-rows-[200px] lg:auto-rows-[240px]">
           {images.map((img, index) => (
             <motion.div
               key={img.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
-              className="break-inside-avoid mb-4"
+              transition={{ duration: 0.5, delay: (index % 5) * 0.08 }}
+              className={getGridPattern(index)}
             >
               <div
-                className="relative group overflow-hidden rounded-2xl bg-slate/10 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300"
+                className="relative group overflow-hidden rounded-2xl bg-slate/10 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 w-full h-full"
                 onClick={() => openLightbox(index)}
                 role="button"
                 tabIndex={0}
                 aria-label={`View photo: ${img.alt}`}
                 onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
               >
-                <div
-                  className="relative w-full overflow-hidden"
-                  style={{ height: index % 5 === 0 ? '320px' : index % 3 === 0 ? '420px' : '260px' }}
-                >
+                <div className="relative w-full h-full bg-[#304653]/5">
                   <Image
                     src={img.src}
                     alt={img.alt}
