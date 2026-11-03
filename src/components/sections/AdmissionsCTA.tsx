@@ -9,12 +9,6 @@ import { motion } from 'framer-motion';
  * enquiry form in the Contact section below.
  */
 export default function AdmissionsCTA() {
-  const scrollToContact = () => {
-    const el = document.getElementById('contact');
-    if (!el) return;
-    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
-  };
-
   return (
     <section className="py-20 bg-[#F4C95D] relative overflow-hidden">
       {/* Subtle decorative blobs */}
@@ -41,13 +35,15 @@ export default function AdmissionsCTA() {
             Spots for the upcoming academic year are filling quickly. Reach out to us today — we&apos;d love to welcome your family.
           </p>
 
-          {/* Single clear CTA pointing to the Contact/Enquiry section below */}
-          <button
-            onClick={scrollToContact}
+          {/* Single clear CTA pointing to WhatsApp chat */}
+          <a
+            href="https://wa.me/917738177135"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#397D67] text-white font-extrabold px-10 py-4 rounded-full text-lg shadow-xl hover:bg-[#304653] transition-colors"
           >
             Send an Enquiry <span>→</span>
-          </button>
+          </a>
         </motion.div>
       </div>
     </section>

@@ -82,11 +82,17 @@ export function Navbar() {
             </a>
           ))}
           <Button
+            asChild
             size="sm"
             className="bg-[#397D67] text-white font-bold shadow hover:bg-[#304653] transition-colors"
-            onClick={() => scrollToSection('#contact')}
           >
-            Enquire Now
+            <a
+              href="https://wa.me/917738177135"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Enquire Now
+            </a>
           </Button>
         </nav>
 
@@ -122,13 +128,17 @@ export function Navbar() {
               ))}
               <div className="pt-4 border-t border-[#DCEAF3] mt-1 pb-2">
                 <Button
+                  asChild
                   className="w-full bg-[#397D67] text-white font-bold text-base h-12"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    requestAnimationFrame(() => scrollToSection('#contact'));
-                  }}
                 >
-                  Enquire Now
+                  <a
+                    href="https://wa.me/917738177135"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Enquire Now
+                  </a>
                 </Button>
               </div>
             </div>

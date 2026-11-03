@@ -12,8 +12,8 @@ export interface VideoItem {
 export const videosItems: VideoItem[] = [
   {
     id: 'video-01',
-    title: 'School Activity 1',
-    description: 'A glimpse of learning and activities at Learning Tree School.',
+    title: 'A Celebration of Culture',
+    description: 'Celebrating traditions, colours and togetherness.',
     thumbnail: null,
     videoUrl: '/school-assets/videos/video-2.mp4',
     orientation: 'portrait',
@@ -21,8 +21,8 @@ export const videosItems: VideoItem[] = [
   },
   {
     id: 'video-02',
-    title: 'School Activity 2',
-    description: 'A glimpse of learning and activities at Learning Tree School.',
+    title: 'Little Hands, Big Creations',
+    description: 'Exploring creativity through fun, hands-on activities.',
     thumbnail: null,
     videoUrl: '/school-assets/videos/video-1.mp4',
     orientation: 'landscape',
@@ -30,8 +30,8 @@ export const videosItems: VideoItem[] = [
   },
   {
     id: 'video-03',
-    title: 'School Activity 3',
-    description: 'A glimpse of learning and activities at Learning Tree School.',
+    title: 'Fancy Dress Competition',
+    description: 'Little stars expressing big imaginations through creative costumes.',
     thumbnail: null,
     videoUrl: '/school-assets/videos/video-4.mp4',
     orientation: 'portrait',
@@ -39,8 +39,8 @@ export const videosItems: VideoItem[] = [
   },
   {
     id: 'video-04',
-    title: 'School Activity 4',
-    description: 'A glimpse of learning and activities at Learning Tree School.',
+    title: 'Learning Together',
+    description: 'Building friendships, sharing experiences and growing together.',
     thumbnail: null,
     videoUrl: '/school-assets/videos/video-3.mp4',
     orientation: 'landscape',

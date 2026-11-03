@@ -50,11 +50,17 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               {/* Primary CTA */}
               <Button
+                asChild
                 size="lg"
                 className="h-14 px-8 text-lg font-bold bg-[#397D67] text-white shadow-xl hover:bg-[#304653] transition-colors"
-                onClick={() => scrollToSection('#contact')}
               >
-                Enquire Now
+                <a
+                  href="https://wa.me/917738177135"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Enquire Now
+                </a>
               </Button>
 
               {/* Secondary CTA — solid border + dark text for legibility */}

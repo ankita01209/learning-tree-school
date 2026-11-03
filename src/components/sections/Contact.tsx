@@ -1,26 +1,8 @@
 'use client';
-import React, { useState } from 'react';
-import { MapPin, Phone, Mail, AlertCircle, CheckCircle2 } from 'lucide-react';
+import React from 'react';
+import { MapPin, Phone, Mail } from 'lucide-react';
 
 export default function Contact() {
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [errorMsg, setErrorMsg] = useState('');
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus('submitting');
-    setErrorMsg('');
-
-    const fd = new FormData(e.currentTarget);
-    const phone = (fd.get('phone') as string) || '';
-    if (phone && phone.replace(/\D/g, '').length < 10) {
-      setStatus('error');
-      setErrorMsg('Please enter a valid 10-digit phone number.');
-      return;
-    }
-    setTimeout(() => setStatus('success'), 1500);
-  };
-
   return (
     <section className="py-24 bg-[#FFF9F2] relative">
       <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
@@ -101,110 +83,25 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right: Enquiry Form (3/5) */}
-          <div className="lg:col-span-3 bg-white rounded-2xl p-7 md:p-10 shadow-md border border-[#DCEAF3]">
-            {status === 'success' ? (
-              <div className="h-full min-h-[360px] flex flex-col items-center justify-center text-center p-6 bg-[#A8D5C2]/10 rounded-2xl border border-[#A8D5C2]/30">
-                <div className="w-16 h-16 bg-[#397D67] rounded-full flex items-center justify-center mb-5 shadow-md">
-                  <CheckCircle2 size={32} color="white" />
-                </div>
-                <h3 className="text-2xl font-extrabold text-[#304653] mb-2">Thank You!</h3>
-                <p className="text-[#304653]/70 text-base max-w-sm">
-                  We&apos;ve received your enquiry. Our admissions team will reach out to you very soon.
-                </p>
-                <button
-                  className="mt-7 border-2 border-[#397D67] text-[#397D67] font-bold px-6 py-2.5 rounded-full hover:bg-[#397D67] hover:text-white transition-colors text-sm"
-                  onClick={() => setStatus('idle')}
-                >
-                  Send Another Enquiry
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <h3 className="text-xl font-extrabold text-[#304653] mb-6">Send an Enquiry</h3>
-
-                {/* Parent Name */}
-                <div>
-                  <label htmlFor="parentName" className="block text-sm font-bold text-[#304653] mb-1.5">
-                    Parent / Guardian Name <span className="text-[#F28C7A]">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="parentName"
-                    name="parentName"
-                    required
-                    placeholder="e.g. Priya Sharma"
-                    className="w-full px-4 py-3 rounded-xl border-2 border-[#DCEAF3] bg-white text-[#304653] placeholder-[#304653]/40 focus:outline-none focus:border-[#397D67] focus:ring-2 focus:ring-[#397D67]/20 transition-all text-base font-medium"
-                  />
-                </div>
-
-                {/* Phone + Email */}
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-bold text-[#304653] mb-1.5">
-                      Phone Number <span className="text-[#F28C7A]">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      required
-                      placeholder="e.g. 98765 43210"
-                      className="w-full px-4 py-3 rounded-xl border-2 border-[#DCEAF3] bg-white text-[#304653] placeholder-[#304653]/40 focus:outline-none focus:border-[#397D67] focus:ring-2 focus:ring-[#397D67]/20 transition-all text-base font-medium"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-bold text-[#304653] mb-1.5">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="e.g. priya@email.com"
-                      className="w-full px-4 py-3 rounded-xl border-2 border-[#DCEAF3] bg-white text-[#304653] placeholder-[#304653]/40 focus:outline-none focus:border-[#397D67] focus:ring-2 focus:ring-[#397D67]/20 transition-all text-base font-medium"
-                    />
-                  </div>
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label htmlFor="message" className="block text-sm font-bold text-[#304653] mb-1.5">
-                    Message / Enquiry <span className="text-[#F28C7A]">*</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={4}
-                    placeholder="I would like to know about admissions for..."
-                    className="w-full px-4 py-3 rounded-xl border-2 border-[#DCEAF3] bg-white text-[#304653] placeholder-[#304653]/40 focus:outline-none focus:border-[#397D67] focus:ring-2 focus:ring-[#397D67]/20 transition-all text-base font-medium resize-none"
-                  />
-                </div>
-
-                {/* Error message */}
-                {status === 'error' && (
-                  <div className="flex items-center gap-2 bg-[#F28C7A]/10 border border-[#F28C7A]/30 text-[#304653] py-3 px-4 rounded-xl">
-                    <AlertCircle size={16} color="#F28C7A" />
-                    <p className="text-sm font-medium">{errorMsg}</p>
-                  </div>
-                )}
-
-                {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={status === 'submitting'}
-                  className="w-full h-14 bg-[#397D67] text-white font-extrabold text-base rounded-xl shadow-lg hover:bg-[#304653] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  {status === 'submitting' ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Sending...
-                    </>
-                  ) : 'Send Enquiry'}
-                </button>
-              </form>
-            )}
+          {/* Right: WhatsApp Enquiry (3/5) */}
+          <div className="lg:col-span-3 bg-white rounded-2xl p-7 md:p-10 shadow-md border border-[#DCEAF3] flex flex-col items-center justify-center text-center min-h-[360px]">
+            <a
+              href="https://wa.me/917738177135"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-lg md:text-xl px-8 py-5 rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-7 h-7 shrink-0"
+                aria-hidden="true"
+              >
+                <path d="M17.472 14.382c-.301-.15-1.78-.879-2.056-.98-.275-.1-.475-.15-.676.15-.2.3-.776.98-.952 1.18-.175.2-.351.226-.652.075s-1.272-.469-2.423-1.496c-.896-.799-1.501-1.786-1.677-2.088-.175-.3-.019-.463.132-.613.136-.134.301-.35.451-.526.151-.175.201-.3.301-.5.1-.2.05-.375-.025-.526-.075-.15-.676-1.63-.927-2.233-.244-.587-.492-.507-.676-.516l-.576-.01c-.2 0-.526.075-.802.375s-1.053 1.028-1.053 2.508c0 1.48 1.078 2.909 1.228 3.109.151.2 2.122 3.24 5.141 4.544.718.31 1.28.495 1.717.634.721.23 1.378.197 1.897.12.578-.087 1.78-.727 2.031-1.429.251-.702.251-1.303.176-1.429-.075-.125-.276-.2-.577-.35zM12.042 21.82a9.78 9.78 0 0 1-4.992-1.365l-.358-.213-3.71.973.99-3.616-.233-.371A9.783 9.783 0 0 1 2.22 12.04c0-5.424 4.41-9.835 9.83-9.835 2.627 0 5.097 1.024 6.955 2.883a9.78 9.78 0 0 1 2.88 6.953c0 5.426-4.41 9.837-9.843 9.837zm0-17.842c-4.414 0-8.006 3.593-8.006 8.008 0 1.41.367 2.787 1.064 4.001l.165.286-.632 2.308 2.36-.619.277.164a8.003 8.003 0 0 0 4.772 1.542c4.414 0 8.007-3.593 8.007-8.008 0-2.14-.834-4.15-2.348-5.665a7.98 7.98 0 0 0-5.66-2.017z" />
+              </svg>
+              Enquire on WhatsApp
+            </a>
           </div>
         </div>
       </div>
