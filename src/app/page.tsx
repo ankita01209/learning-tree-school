@@ -4,7 +4,6 @@ import About from "@/components/sections/About";
 import MissionVision from "@/components/sections/MissionVision";
 import Programs from "@/components/sections/Programs";
 import WhyLearningTree from "@/components/sections/WhyLearningTree";
-import Facilities from "@/components/sections/Facilities";
 import SchoolLife from "@/components/sections/SchoolLife";
 import Gallery from "@/components/sections/Gallery";
 import Videos from "@/components/sections/Videos";
@@ -20,7 +19,6 @@ export default function Home() {
       <MissionVision />
       <div id="programs"><Programs /></div>
       <div id="why-us"><WhyLearningTree /></div>
-      <div id="facilities"><Facilities /></div>
       <div id="school-life"><SchoolLife /></div>
       <div id="gallery"><Gallery /></div>
       <Videos />

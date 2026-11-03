@@ -1,5 +1,5 @@
 export type MediaType = 'image' | 'video';
-export type MediaCategory = 'hero' | 'gallery' | 'activities' | 'facilities' | 'videos';
+export type MediaCategory = 'hero' | 'gallery' | 'activities' | 'videos';
 
 export interface MediaItem {
   id: string;
@@ -61,4 +61,4 @@ export const mediaData: MediaItem[] = [
 export const getGalleryImages = () => mediaData.filter(m => m.type === 'image' && m.category.includes('gallery'));
 export const getGalleryVideos = () => mediaData.filter(m => m.type === 'video');
 export const getHeroImage = () => mediaData.find(m => m.category.includes('hero'));
-export const getFacilitiesImages = () => mediaData.filter(m => m.category.includes('facilities'));
+

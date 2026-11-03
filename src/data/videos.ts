@@ -4,6 +4,7 @@ export interface VideoItem {
   description: string;
   thumbnail: string | null;
   videoUrl: string;
+  orientation: 'landscape' | 'portrait';
   isUnverified: boolean;
 }
 
@@ -15,6 +16,7 @@ export const videosItems: VideoItem[] = [
     description: 'A glimpse of learning and activities at Learning Tree School.',
     thumbnail: null,
     videoUrl: '/school-assets/videos/video-2.mp4',
+    orientation: 'portrait',
     isUnverified: true,
   },
   {
@@ -23,6 +25,7 @@ export const videosItems: VideoItem[] = [
     description: 'A glimpse of learning and activities at Learning Tree School.',
     thumbnail: null,
     videoUrl: '/school-assets/videos/video-1.mp4',
+    orientation: 'landscape',
     isUnverified: true,
   },
   {
@@ -31,6 +34,7 @@ export const videosItems: VideoItem[] = [
     description: 'A glimpse of learning and activities at Learning Tree School.',
     thumbnail: null,
     videoUrl: '/school-assets/videos/video-4.mp4',
+    orientation: 'portrait',
     isUnverified: true,
   },
   {
@@ -39,6 +43,7 @@ export const videosItems: VideoItem[] = [
     description: 'A glimpse of learning and activities at Learning Tree School.',
     thumbnail: null,
     videoUrl: '/school-assets/videos/video-3.mp4',
+    orientation: 'landscape',
     isUnverified: true,
   },
 ];
