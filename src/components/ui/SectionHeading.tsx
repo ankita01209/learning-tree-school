@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { motion, HTMLMotionProps } from 'framer-motion';
+import { motion, HTMLMotionProps, useReducedMotion } from 'framer-motion';
 
 interface SectionHeadingProps extends HTMLMotionProps<'div'> {
   title: string;
@@ -11,12 +11,14 @@ interface SectionHeadingProps extends HTMLMotionProps<'div'> {
 }
 
 export function SectionHeading({ title, subtitle, align = 'center', light = false, className, ...props }: SectionHeadingProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: shouldReduceMotion ? 0.2 : 0.5 }}
       className={cn(
         'flex flex-col gap-3 mb-4 w-full',
         align === 'center' ? 'items-center text-center' : align === 'right' ? 'items-end text-right' : 'items-start text-left',

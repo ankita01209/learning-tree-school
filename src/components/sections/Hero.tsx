@@ -1,15 +1,16 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import Image from 'next/image';
-
 import { scrollToSection } from '@/lib/scrollToSection';
+import { WHATSAPP_URL } from '@/data/contact';
 
 export default function Hero() {
+  const shouldReduceMotion = useReducedMotion();
   const heroImage = {
     src: '/school-assets/hero/firstday1.jpeg',
-    alt: 'First day at Learning Tree',
+    alt: 'First day at Learning Tree School',
   };
 
   return (
@@ -22,9 +23,9 @@ export default function Hero() {
         {/* Left copy — all text uses explicit high-contrast colors */}
         <div className="max-w-2xl">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: shouldReduceMotion ? 0.2 : 0.6 }}
           >
             <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-[#F4C95D]/25 text-[#304653] font-bold text-sm mb-6 border border-[#F4C95D]/60 shadow-sm">
               <span className="w-2 h-2 bg-[#F28C7A] rounded-full animate-pulse" />
@@ -55,7 +56,7 @@ export default function Hero() {
                 className="h-14 px-8 text-lg font-bold bg-[#397D67] text-white shadow-xl hover:bg-[#304653] transition-colors"
               >
                 <a
-                  href="https://wa.me/917738177135"
+                  href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -93,9 +94,9 @@ export default function Hero() {
 
         {/* Right: Hero image */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 10 }}
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
+          transition={{ duration: shouldReduceMotion ? 0.2 : 0.7, delay: shouldReduceMotion ? 0 : 0.15 }}
           className="relative h-[400px] sm:h-[520px] lg:h-[640px] w-full"
         >
           {heroImage && (
@@ -114,7 +115,7 @@ export default function Hero() {
 
           {/* Floating widgets */}
           <motion.div
-            animate={{ y: [0, -12, 0] }}
+            animate={shouldReduceMotion ? {} : { y: [0, -12, 0] }}
             transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut' }}
             className="absolute top-6 -left-4 bg-white px-4 py-3 rounded-2xl shadow-xl z-10 hidden sm:block border border-[#F4C95D]/30"
           >
@@ -123,7 +124,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            animate={{ y: [0, 14, 0] }}
+            animate={shouldReduceMotion ? {} : { y: [0, 14, 0] }}
             transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut', delay: 0.5 }}
             className="absolute bottom-12 -right-4 bg-white px-4 py-3 rounded-2xl shadow-xl z-10 hidden sm:block border border-[#A8D5C2]/30"
           >

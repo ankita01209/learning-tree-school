@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 
 // Verified program data — no invented curriculum
@@ -62,6 +62,7 @@ const journey = [
 ];
 
 export default function Programs() {
+  const shouldReduceMotion = useReducedMotion();
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -85,10 +86,10 @@ export default function Programs() {
             {journey.map((item, i) => (
               <motion.div
                 key={item.stage}
-                initial={{ opacity: 0, y: 30 }}
+                initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: shouldReduceMotion ? 0.2 : 0.5, delay: shouldReduceMotion ? 0 : i * 0.1 }}
                 className="flex flex-col items-center text-center group"
               >
                 {/* Stage number circle */}
@@ -131,10 +132,10 @@ export default function Programs() {
             {journey.map((item, i) => (
               <motion.div
                 key={item.stage}
-                initial={{ opacity: 0, x: -20 }}
+                initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
+                transition={{ duration: shouldReduceMotion ? 0.2 : 0.4, delay: shouldReduceMotion ? 0 : i * 0.08 }}
                 className="relative flex gap-4"
               >
                 {/* Dot on the timeline */}
