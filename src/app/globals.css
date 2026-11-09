@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFF9F2; /* Warm Ivory — exact brand color */
+  --foreground: #304653; /* Deep Slate — exact brand color */
+}
+
+/* NOTE: Dark mode is intentionally disabled — this is a school website
+   that must always render with the warm ivory background. The previous
+   prefers-color-scheme block was causing text to render near-white on 
+   light backgrounds in some system configurations. */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-forest:  #397D67;
+  --color-ivory:   #FFF9F2;
+  --color-sage:    #A8D5C2;
+  --color-coral:   #F28C7A;
+  --color-gold:    #F4C95D;
+  --color-peach:   #FCE0D8;
+  --color-mist:    #DCEAF3;
+  --color-slate:   #304653;
+  --color-white:   #ffffff;
+
+  --font-sans: var(--font-nunito-sans), "ui-sans-serif", "system-ui", "sans-serif";
+  --font-heading: var(--font-dm-sans), "ui-sans-serif", "system-ui", "sans-serif";
+}
+
+/* Force light-mode body regardless of OS preference */
+body {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: #304653; /* Always slate, never white */
+}
+
+/* Smooth scroll offset so fixed navbar doesn't cover sections.
+   scroll-padding-top: 80px matches the navbar height used in scrollToSection.ts. */
+html {
+  scroll-padding-top: 80px;
+  scroll-behavior: smooth;
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

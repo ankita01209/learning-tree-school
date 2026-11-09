@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#A8D5C2"/>
+  <rect x="20" y="20" width="760" height="560" rx="16" fill="none" stroke="#397D67" stroke-width="4" stroke-dasharray="16,8"/>
+  <!-- Camera icon -->
+  <rect x="340" y="195" width="120" height="90" rx="12" fill="#397D67"/>
+  <circle cx="400" cy="240" r="28" fill="#FFF9F2"/>
+  <circle cx="400" cy="240" r="18" fill="#A8D5C2"/>
+  <!-- Label -->
+  <text x="400" y="335" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#304653" text-anchor="middle">Photo Coming Soon</text>
+  <text x="400" y="375" font-family="system-ui, sans-serif" font-size="20" font-weight="600" fill="#397D67" text-anchor="middle">Spacious Play Area</text>
+  <text x="400" y="415" font-family="system-ui, sans-serif" font-size="14" fill="#304653" opacity="0.5" text-anchor="middle">Replace this file with a real photo</text>
+</svg>
