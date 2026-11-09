@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 const stats = [
   { value: '2017', label: 'Established', suffix: '' },
@@ -10,6 +10,8 @@ const stats = [
 ];
 
 export default function TrustStats() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section className="py-14 bg-[#397D67] relative overflow-hidden">
       <div className="absolute inset-0 opacity-5 pointer-events-none"
@@ -20,10 +22,10 @@ export default function TrustStats() {
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: shouldReduceMotion ? 0.2 : 0.5, delay: shouldReduceMotion ? 0 : index * 0.1 }}
               className="flex flex-col items-center justify-center p-4 space-y-1 border-r border-white/20 last:border-0"
             >
               <div className="flex items-baseline gap-1">

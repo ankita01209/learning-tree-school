@@ -1,8 +1,10 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export default function MissionVision() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section className="py-20 bg-[#DCEAF3]">
       <div className="container mx-auto px-4 lg:px-8">
@@ -20,10 +22,10 @@ export default function MissionVision() {
 
           {/* MISSION */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: shouldReduceMotion ? 0.2 : 0.6 }}
             className="bg-white rounded-3xl p-8 md:p-10 shadow-md border-l-8 border-[#397D67] relative overflow-hidden"
           >
             {/* Watermark label */}
@@ -49,10 +51,10 @@ export default function MissionVision() {
 
           {/* VISION */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            transition={{ duration: shouldReduceMotion ? 0.2 : 0.6, delay: shouldReduceMotion ? 0 : 0.15 }}
             className="bg-white rounded-3xl p-8 md:p-10 shadow-md border-l-8 border-[#F4C95D] relative overflow-hidden"
           >
             {/* Watermark label */}
@@ -64,15 +66,15 @@ export default function MissionVision() {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl bg-[#F4C95D] flex items-center justify-center shadow-sm">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#304653" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                  <circle cx="12" cy="12" r="3"/>
+                  <circle cx="12" cy="12" r="2"/>
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
                 </svg>
               </div>
-              <span className="text-lg font-extrabold text-[#F4C95D] tracking-widest uppercase" style={{ textShadow: '0 1px 2px rgba(48,70,83,0.15)' }}>Vision</span>
+              <span className="text-lg font-extrabold text-[#304653] tracking-widest uppercase">Vision</span>
             </div>
 
             <p className="text-[#304653] text-lg leading-relaxed font-medium">
-              To be a beacon of progressive early childhood and primary education where students are inspired to explore their unique talents and shape a harmonious, innovative future.
+              To be a benchmark institution in early childhood and primary education, renowned for joyful inquiry, academic excellence, creative expression, and strong moral character.
             </p>
           </motion.div>
 

@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ShieldCheck, HeartHandshake, Smile, Users } from 'lucide-react';
 
 const features = [
@@ -35,6 +35,8 @@ const features = [
 ];
 
 export default function WhyLearningTree() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section className="py-24 bg-[#397D67] relative overflow-hidden">
       {/* Decorative blob — very subtle */}
@@ -59,21 +61,27 @@ export default function WhyLearningTree() {
             const Icon = feature.icon;
             return (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
+                key={feature.title}
+                initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-7 shadow-md hover:shadow-xl transition-shadow duration-300 group"
+                transition={{ duration: shouldReduceMotion ? 0.2 : 0.5, delay: shouldReduceMotion ? 0 : index * 0.1 }}
+                className="bg-white rounded-3xl p-7 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1 flex flex-col items-start border border-white/10"
               >
                 <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300"
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm"
                   style={{ backgroundColor: feature.accent }}
                 >
-                  <Icon size={26} style={{ color: feature.iconColor }} />
+                  <Icon size={28} color={feature.iconColor} strokeWidth={2.2} />
                 </div>
-                <h3 className="text-lg font-extrabold text-[#304653] mb-3">{feature.title}</h3>
-                <p className="text-[#304653]/70 leading-relaxed text-sm">{feature.description}</p>
+
+                <h3 className="text-xl font-extrabold text-[#304653] mb-3">
+                  {feature.title}
+                </h3>
+
+                <p className="text-[#304653] text-sm leading-relaxed font-medium opacity-80">
+                  {feature.description}
+                </p>
               </motion.div>
             );
           })}

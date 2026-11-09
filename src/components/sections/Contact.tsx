@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
+import { CONTACT_INFO, WHATSAPP_URL } from '@/data/contact';
 
 export default function Contact() {
   return (
@@ -35,9 +36,9 @@ export default function Contact() {
                   <div>
                     <p className="text-xs font-bold text-[#397D67] uppercase tracking-widest mb-1">Address</p>
                     <p className="text-sm text-[#304653] leading-relaxed">
-                      K. K. Solitaire, Plot No. 111,<br />
-                      Shop No. 1 &amp; 2, Sector 20,<br />
-                      Ulwe, Navi Mumbai, India
+                      {CONTACT_INFO.address.line1}<br />
+                      {CONTACT_INFO.address.line2}<br />
+                      {CONTACT_INFO.address.city}
                     </p>
                   </div>
                 </li>
@@ -48,8 +49,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-[#397D67] uppercase tracking-widest mb-1">Phone</p>
-                    <a href="tel:7738177135" className="text-sm text-[#304653] hover:text-[#397D67] transition-colors font-medium">
-                      7738177135
+                    <a href={CONTACT_INFO.phoneHref} className="text-sm text-[#304653] hover:text-[#397D67] transition-colors font-medium">
+                      {CONTACT_INFO.phoneDisplay}
                     </a>
                   </div>
                 </li>
@@ -60,8 +61,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-[#397D67] uppercase tracking-widest mb-1">Email</p>
-                    <a href="mailto:learningtree012@gmail.com" className="text-sm text-[#304653] hover:text-[#397D67] transition-colors font-medium break-all">
-                      learningtree012@gmail.com
+                    <a href={CONTACT_INFO.emailHref} className="text-sm text-[#304653] hover:text-[#397D67] transition-colors font-medium break-all">
+                      {CONTACT_INFO.email}
                     </a>
                   </div>
                 </li>
@@ -86,10 +87,10 @@ export default function Contact() {
           {/* Right: WhatsApp Enquiry (3/5) */}
           <div className="lg:col-span-3 bg-white rounded-2xl p-7 md:p-10 shadow-md border border-[#DCEAF3] flex flex-col items-center justify-center text-center min-h-[360px]">
             <a
-              href="https://wa.me/917738177135"
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-lg md:text-xl px-8 py-5 rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+              className="inline-flex items-center justify-center gap-3 bg-[#128C7E] hover:bg-[#0e6f63] text-white font-extrabold text-lg md:text-xl px-8 py-5 rounded-2xl shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

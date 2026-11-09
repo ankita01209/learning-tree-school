@@ -1,7 +1,9 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
 import { navLinks } from '@/data/navigation';
 import { scrollToSection } from '@/lib/scrollToSection';
+import { CONTACT_INFO } from '@/data/contact';
 
 const footerNavLinks = navLinks.filter(l => l.href !== '#home').map(l => ({
   name: l.name === 'About' ? 'About Us' : l.name,
@@ -24,9 +26,11 @@ export function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-5">
-              <img
+              <Image
                 src="/school-assets/logo.jpeg"
                 alt="Learning Tree School logo"
+                width={40}
+                height={40}
                 className="w-10 h-10 object-contain rounded-full shrink-0"
               />
 
@@ -62,7 +66,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Programs */}
+          {/* Our Programs */}
           <div>
             <h4 className="text-sm font-extrabold text-[#F4C95D] mb-5 uppercase tracking-widest">Our Programs</h4>
             <ul className="space-y-3">
@@ -74,23 +78,23 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact Us */}
           <div>
             <h4 className="text-sm font-extrabold text-[#F4C95D] mb-5 uppercase tracking-widest">Contact Us</h4>
             <ul className="space-y-4">
               <li className="text-white/70 text-sm leading-relaxed">
-                K. K. Solitaire, Plot No. 111,<br />
-                Shop No. 1 &amp; 2, Sector 20,<br />
-                Ulwe, Navi Mumbai, India
+                {CONTACT_INFO.address.line1}<br />
+                {CONTACT_INFO.address.line2}<br />
+                {CONTACT_INFO.address.city}
               </li>
               <li>
-                <a href="tel:7738177135" className="text-white/70 text-sm hover:text-white transition-colors">
-                  7738177135
+                <a href={CONTACT_INFO.phoneHref} className="text-white/70 text-sm hover:text-white transition-colors">
+                  {CONTACT_INFO.phoneDisplay}
                 </a>
               </li>
               <li>
-                <a href="mailto:learningtree012@gmail.com" className="text-white/70 text-sm hover:text-white transition-colors break-all">
-                  learningtree012@gmail.com
+                <a href={CONTACT_INFO.emailHref} className="text-white/70 text-sm hover:text-white transition-colors break-all">
+                  {CONTACT_INFO.email}
                 </a>
               </li>
             </ul>
@@ -102,10 +106,6 @@ export function Footer() {
           <p className="text-white/40 text-xs">
             &copy; {new Date().getFullYear()} Learning Tree School. All rights reserved.
           </p>
-          <div className="flex gap-5 text-xs">
-            <a href="#" className="text-white/40 hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="text-white/40 hover:text-white transition-colors">Terms of Service</a>
-          </div>
         </div>
       </div>
     </footer>

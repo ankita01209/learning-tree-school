@@ -1,21 +1,37 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import Image from 'next/image';
 import { navLinks } from '@/data/navigation';
 import { scrollToSection } from '@/lib/scrollToSection';
+import { WHATSAPP_URL } from '@/data/contact';
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Close mobile drawer on Escape and return focus to hamburger button
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false);
+        hamburgerRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
 
   /**
    * handleNavClick — fixes the mobile animation-race bug.
@@ -87,7 +103,7 @@ export function Navbar() {
             className="bg-[#397D67] text-white font-bold shadow hover:bg-[#304653] transition-colors"
           >
             <a
-              href="https://wa.me/917738177135"
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -98,9 +114,12 @@ export function Navbar() {
 
         {/* Mobile hamburger */}
         <button
+          ref={hamburgerRef}
           className="xl:hidden p-2 text-[#397D67] bg-white rounded-full shadow border border-[#DCEAF3]"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle navigation menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-nav-menu"
         >
           {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -110,9 +129,10 @@ export function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+            id="mobile-nav-menu"
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
+            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, height: 'auto' }}
+            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
             className="xl:hidden absolute top-full left-0 w-full bg-white shadow-2xl border-t border-[#DCEAF3] overflow-hidden z-40"
           >
             <div className="container mx-auto px-4 py-5 flex flex-col gap-1">
@@ -132,7 +152,7 @@ export function Navbar() {
                   className="w-full bg-[#397D67] text-white font-bold text-base h-12"
                 >
                   <a
-                    href="https://wa.me/917738177135"
+                    href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMobileMenuOpen(false)}

@@ -1,14 +1,11 @@
 'use client';
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { WHATSAPP_URL } from '@/data/contact';
 
-/**
- * AdmissionsCTA — a deliberate conversion moment between Videos and the final
- * enquiry form. It does NOT duplicate the "Enquire Now" hero button.
- * It serves as a contextual lead-in that scrolls the user to the
- * enquiry form in the Contact section below.
- */
 export default function AdmissionsCTA() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section className="py-20 bg-[#F4C95D] relative overflow-hidden">
       {/* Subtle decorative blobs */}
@@ -17,10 +14,10 @@ export default function AdmissionsCTA() {
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: shouldReduceMotion ? 0.2 : 0.6 }}
           className="max-w-3xl mx-auto"
         >
           <span className="inline-block bg-[#397D67] text-white text-xs font-extrabold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6 shadow-sm">
@@ -37,7 +34,7 @@ export default function AdmissionsCTA() {
 
           {/* Single clear CTA pointing to WhatsApp chat */}
           <a
-            href="https://wa.me/917738177135"
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#397D67] text-white font-extrabold px-10 py-4 rounded-full text-lg shadow-xl hover:bg-[#304653] transition-colors"

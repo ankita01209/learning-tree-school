@@ -1,10 +1,11 @@
 'use client';
-import React, { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { galleryImages } from '@/data/gallery';
+
 const getGridPattern = (index: number) => {
   const c = [
     "col-span-1 row-span-1 sm:col-span-2 sm:row-span-2 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2",
@@ -41,8 +42,12 @@ const getGridPattern = (index: number) => {
 export default function Gallery() {
   const images = galleryImages;
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const thumbnailRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lastTriggerIndex = useRef<number | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const openLightbox = useCallback((index: number) => {
+    lastTriggerIndex.current = index;
     setLightboxIndex(index);
     document.body.style.overflow = 'hidden';
   }, []);
@@ -50,6 +55,9 @@ export default function Gallery() {
   const closeLightbox = useCallback(() => {
     setLightboxIndex(null);
     document.body.style.overflow = '';
+    if (lastTriggerIndex.current !== null) {
+      thumbnailRefs.current[lastTriggerIndex.current]?.focus();
+    }
   }, []);
 
   const goNext = useCallback(() => {
@@ -63,7 +71,7 @@ export default function Gallery() {
   }, [lightboxIndex, images.length]);
 
   // Keyboard navigation
-  React.useEffect(() => {
+  useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (lightboxIndex === null) return;
       if (e.key === 'Escape') closeLightbox();
@@ -86,19 +94,25 @@ export default function Gallery() {
           {images.map((img, index) => (
             <motion.div
               key={img.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.5, delay: (index % 5) * 0.08 }}
+              transition={{ duration: shouldReduceMotion ? 0.2 : 0.5, delay: shouldReduceMotion ? 0 : (index % 5) * 0.08 }}
               className={getGridPattern(index)}
             >
               <div
-                className="relative group overflow-hidden rounded-2xl bg-slate/10 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 w-full h-full"
+                ref={(el) => { thumbnailRefs.current[index] = el; }}
+                className="relative group overflow-hidden rounded-2xl bg-slate/10 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 w-full h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#397D67]"
                 onClick={() => openLightbox(index)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openLightbox(index);
+                  }
+                }}
                 role="button"
                 tabIndex={0}
                 aria-label={`View photo: ${img.alt}`}
-                onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
               >
                 <div className="relative w-full h-full bg-[#304653]/5">
                   <Image
@@ -128,13 +142,13 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: shouldReduceMotion ? 0.05 : 0.2 }}
             className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center p-4"
             onClick={closeLightbox}
           >
             {/* Close Button */}
             <button
-              className="absolute top-4 right-4 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-sm border border-white/20"
+              className="absolute top-4 right-4 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-sm border border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               onClick={closeLightbox}
               aria-label="Close lightbox"
             >
@@ -148,7 +162,7 @@ export default function Gallery() {
 
             {/* Prev Button */}
             <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-sm border border-white/20"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-sm border border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               onClick={(e) => { e.stopPropagation(); goPrev(); }}
               aria-label="Previous image"
             >
@@ -158,10 +172,10 @@ export default function Gallery() {
             {/* Image */}
             <motion.div
               key={lightboxIndex}
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.92 }}
-              transition={{ duration: 0.2 }}
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.92 }}
+              animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.92 }}
+              transition={{ duration: shouldReduceMotion ? 0.05 : 0.2 }}
               className="relative w-full max-w-5xl max-h-[85vh] rounded-2xl overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
@@ -179,7 +193,7 @@ export default function Gallery() {
 
             {/* Next Button */}
             <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-sm border border-white/20"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-sm border border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               onClick={(e) => { e.stopPropagation(); goNext(); }}
               aria-label="Next image"
             >
