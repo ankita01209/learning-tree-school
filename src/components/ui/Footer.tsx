@@ -83,9 +83,16 @@ export function Footer() {
             <h4 className="text-sm font-extrabold text-[#F4C95D] mb-5 uppercase tracking-widest">Contact Us</h4>
             <ul className="space-y-4">
               <li className="text-white/70 text-sm leading-relaxed">
-                {CONTACT_INFO.address.line1}<br />
-                {CONTACT_INFO.address.line2}<br />
-                {CONTACT_INFO.address.city}
+                <a
+                  href={CONTACT_INFO.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors block"
+                >
+                  {CONTACT_INFO.address.line1}<br />
+                  {CONTACT_INFO.address.line2}<br />
+                  {CONTACT_INFO.address.city}
+                </a>
               </li>
               <li>
                 <a href={CONTACT_INFO.phoneHref} className="text-white/70 text-sm hover:text-white transition-colors">

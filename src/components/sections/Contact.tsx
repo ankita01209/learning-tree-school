@@ -35,11 +35,16 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-xs font-bold text-[#397D67] uppercase tracking-widest mb-1">Address</p>
-                    <p className="text-sm text-[#304653] leading-relaxed">
+                    <a
+                      href={CONTACT_INFO.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-[#304653] hover:text-[#397D67] transition-colors font-medium leading-relaxed block"
+                    >
                       {CONTACT_INFO.address.line1}<br />
                       {CONTACT_INFO.address.line2}<br />
                       {CONTACT_INFO.address.city}
-                    </p>
+                    </a>
                   </div>
                 </li>
 
@@ -70,17 +75,28 @@ export default function Contact() {
             </div>
 
             {/* Google Map */}
-            <div className="rounded-2xl overflow-hidden h-52 border border-[#DCEAF3] shadow-md">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15094.062402127394!2d73.01183315!3d18.95280325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c39055555555%3A0x1234567890abcdef!2sSector%2020%2C%20Ulwe%2C%20Navi%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1611111111111!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Learning Tree School Location"
-              />
+            <div className="rounded-2xl overflow-hidden border border-[#DCEAF3] shadow-md bg-white flex flex-col">
+              <div className="h-52 w-full">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3772.4883491410185!2d73.0294384!3d18.9776022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDU4JzM5LjQiTiA3M8KwMDEnNDYuMCJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Learning Tree School Location"
+                />
+              </div>
+              <a
+                href={CONTACT_INFO.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 py-3 px-4 text-xs font-bold text-[#397D67] hover:text-white hover:bg-[#397D67] transition-colors border-t border-[#DCEAF3] bg-[#F7FAFC]"
+              >
+                <MapPin size={14} />
+                Get Directions on Google Maps
+              </a>
             </div>
           </div>
 

@@ -5,7 +5,7 @@
  * When the custom domain is registered and connected in Vercel,
  * update SITE_URL to the real production domain (e.g., https://learningtreeschool.com).
  */
-export const SITE_URL = 'https://learningtreeschool-preview.vercel.app';
+export const SITE_URL = 'https://learning-tree-school.vercel.app';
 
 export const SITE_CONFIG = {
   name: 'Learning Tree School',
