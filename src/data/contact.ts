@@ -14,7 +14,7 @@ export const CONTACT_INFO = {
     line2: 'Shop No. 1 & 2, Sector 20,',
     city: 'Ulwe, Navi Mumbai, India',
   },
-  mapUrl: 'https://maps.app.goo.gl/9T7QFnznoXCigsPh7',
+  mapUrl: 'https://maps.app.goo.gl/Ypf8gerxnRw8SGMSA?g_st=aw',
   whatsappNumber: '917738177135',
 } as const;
 

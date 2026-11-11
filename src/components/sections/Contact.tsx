@@ -78,7 +78,7 @@ export default function Contact() {
             <div className="rounded-2xl overflow-hidden border border-[#DCEAF3] shadow-md bg-white flex flex-col">
               <div className="h-52 w-full">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3772.4883491410185!2d73.0294384!3d18.9776022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDU4JzM5LjQiTiA3M8KwMDEnNDYuMCJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3772.95482943983!2d73.0294384!3d18.977602199999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c3565d9ee42f%3A0xa6a4d92e6ea4539d!2sLearning%20Tree%20Pre%20Primary%20and%20Primary%20School!5e0!3m2!1sen!2sin!4v1794426701315!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
